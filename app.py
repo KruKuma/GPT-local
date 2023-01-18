@@ -29,10 +29,18 @@ def generate_text(prompt):
 
 
 def main():
-    question = input(">> ")
-    answer = generate_text(question)
+    app = 1
 
-    print(answer)
+    while app == 1:
+        question = input(">> ")
+
+        if question != "quit":
+            answer = generate_text(question)
+            print(answer)
+            continue
+
+        else:
+            app = 0
 
 
 if __name__ == "__main__":
