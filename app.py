@@ -24,7 +24,7 @@ def generate_text(prompt):
         temperature=0.7
     )
 
-    message = completions.choces[0].text
+    message = completions.choices[0].text
     return message.strip()
 
 
