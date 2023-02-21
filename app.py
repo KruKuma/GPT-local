@@ -1,6 +1,7 @@
+import logging
 import os
-
 import openai
+import openai.error
 
 import utils
 
@@ -15,17 +16,20 @@ def build_api():
 
 
 def generate_text(prompt):
-    completions = openai.Completion.create(
-        engine="text-davinci-002",
-        prompt=prompt,
-        max_tokens=1024,
-        n=1,
-        stop=None,
-        temperature=0.7
-    )
+    try:
+        completions = openai.Completion.create(
+            engine="text-davinci-002",
+            prompt=prompt,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.7
+        )
 
-    message = completions.choices[0].text
-    return message.strip()
+        message = completions.choices[0].text
+        return message.strip()
+    except openai.error.APIError as e:
+        return logging.error(e)
 
 
 def main():
