@@ -9,7 +9,7 @@ import utils
 class Application:
     def __init__(self):
         project_directory = os.path.dirname(os.path.abspath(__file__))
-        dot_env_file_path = os.path.join(project_directory, "../.env")
+        dot_env_file_path = os.path.join(project_directory, ".env")
         dot_env_file = utils.DotEnvFile(dot_env_file_path)
         open_api_key = dot_env_file.load_open_ai_key()
         model_code = dot_env_file.load_model_code()
