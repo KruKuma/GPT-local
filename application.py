@@ -12,7 +12,8 @@ class Application:
         dot_env_file_path = os.path.join(project_directory, ".env")
         dot_env_file = utils.DotEnvFile(dot_env_file_path)
         open_api_key = dot_env_file.load_open_ai_key()
-        self._model = dot_env_file.load_model_code()
+        model_code = dot_env_file.load_model_code()
+        self._model = model_code.get("model")
 
         openai.api_key = open_api_key.get("api_key")
 
