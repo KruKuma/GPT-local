@@ -14,15 +14,11 @@ class Chat(BaseGPT):
 
         try:
             completions = openai.ChatCompletion.create(
-                engine=self._model,
-                prompt=prompt,
-                max_tokens=1024,
-                n=1,
-                stop=None,
-                temperature=0.7
+                model=self._model,
+                messages=[{"role": "user", "content": prompt}]
             )
 
-            message = completions.choices[0].text.strip()
+            message = completions.choices[0].message.content
             if not message:
                 return "Could not generate response"
 
