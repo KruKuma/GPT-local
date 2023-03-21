@@ -13,6 +13,11 @@ class DotEnvFile:
 
         return open_api_key
 
+    def load_model_code(self):
+        model_code = self._load_arguments({"model": "MODEL_CODE"})
+
+        return model_code
+
     @staticmethod
     def _check_dot_env_file_path(dot_env_file_path):
         if not isinstance(dot_env_file_path, str):
