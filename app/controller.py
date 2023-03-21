@@ -8,24 +8,32 @@ class Controller:
 
     def chat_request(self):
         print("Type 'quit' to close")
+
+        conversation_history = [{
+            "role": "system",
+            "content": "You are a helpful assistant."}]
+
         run = 1
         while run != 0:
             prompt = input(">>")
 
             if prompt != "quit":
-                response = self._chat.gpt_request(prompt)
+                response = self._chat.gpt_request(conversation_history, prompt)
                 print(f"\n{response}")
             else:
                 run = 0
 
     def text_completion_request(self):
         print("Type 'quit' to close")
+
+        conversation_history = None
+
         run = 1
         while run != 0:
             prompt = input(">>")
 
             if prompt != "quit":
-                response = self._completion.gpt_request(prompt)
+                response = self._completion.gpt_request(conversation_history, prompt)
                 print(f"\n{response}")
             else:
                 run = 0

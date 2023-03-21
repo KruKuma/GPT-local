@@ -10,7 +10,7 @@ class Completion(BaseGPT):
     def __init__(self, model):
         self._model = model
 
-    def gpt_request(self, prompt):
+    def gpt_request(self, conversation_history, prompt):
         self.check_prompt(prompt)
 
         try:

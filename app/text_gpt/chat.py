@@ -9,16 +9,20 @@ class Chat(BaseGPT):
     def __init__(self, model):
         self._model = model
 
-    def gpt_request(self, prompt):
+    def gpt_request(self, conversation_history, prompt):
         self.check_prompt(prompt)
+
+        conversation_history.append({"role": "user", "content": prompt})
 
         try:
             completions = openai.ChatCompletion.create(
                 model=self._model,
-                messages=[{"role": "user", "content": prompt}]
+                messages=conversation_history
             )
 
             message = completions.choices[0].message.content
+            conversation_history.append({"role": "assistant", "content": message})
+
             if not message:
                 return "Could not generate response"
 
