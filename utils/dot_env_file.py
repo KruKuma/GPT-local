@@ -14,7 +14,8 @@ class DotEnvFile:
         return open_api_key
 
     def load_model_code(self):
-        model_code = self._load_arguments({"model": "MODEL_CODE"})
+        model_code = self._load_arguments({"chat_model": "CHAT_MODEL",
+                                           "text_completion": "TEXT_COMPLETION_MODEL"})
 
         return model_code
 

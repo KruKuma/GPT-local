@@ -17,7 +17,8 @@ To setup your local environment, create at the project root a `.env` file with:
 OPEN_AI_KEY=YOUR_API_KEY
 
 # GPT Models
-MODEL_CODE=YOUR_MODEL_CODE
+CHAT_MODEL=CHAT_MODEL
+TEXT_COMPLETION_MODEL=TEXT_COMPLETION_MODEL
 ```
 Fill the missing fields with their appropriate values.
 
