@@ -14,6 +14,14 @@ template `.env` file.
 To setup your local environment, create at the project root a `.env` file with:
 ```dotenv
 # OPEN_AI_KEY
-OPEN_AI_KEY=YOUR-API-KEY
+OPEN_AI_KEY=YOUR_API_KEY
+
+# GPT Models
+MODEL_CODE=YOUR_MODEL_CODE
 ```
 Fill the missing fields with their appropriate values.
+
+#### Running the Application
+The application can simply be run by using this code in the terminal:
+* run application: `python -m main`
+
