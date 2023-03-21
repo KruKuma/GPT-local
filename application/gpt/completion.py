@@ -1,23 +1,16 @@
+
 import logging
-import os
 import openai
 import openai.error
 
-import utils
+from application.gpt.base_gpt import BaseGPT
 
 
-class Completion:
-    def __init__(self):
-        project_directory = os.path.dirname(os.path.abspath(__file__))
-        dot_env_file_path = os.path.join(project_directory, "../.env")
-        dot_env_file = utils.DotEnvFile(dot_env_file_path)
-        open_api_key = dot_env_file.load_open_ai_key()
-        model_code = dot_env_file.load_model_code()
-        self._model = model_code.get("model")
+class Completion(BaseGPT):
+    def __init__(self, model):
+        self._model = model
 
-        openai.api_key = open_api_key.get("api_key")
-
-    def generate_text(self, prompt):
+    def gpt_request(self, prompt):
         self.check_prompt(prompt)
 
         try:
