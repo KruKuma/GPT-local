@@ -12,6 +12,7 @@ class Application:
         dot_env_file_path = os.path.join(project_directory, ".env")
         dot_env_file = utils.DotEnvFile(dot_env_file_path)
         open_api_key = dot_env_file.load_open_ai_key()
+        self._model = dot_env_file.load_model_code()
 
         openai.api_key = open_api_key.get("api_key")
 
@@ -20,7 +21,7 @@ class Application:
 
         try:
             completions = openai.Completion.create(
-                engine="text-davinci-003",
+                engine=self._model,
                 prompt=prompt,
                 max_tokens=1024,
                 n=1,
