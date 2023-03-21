@@ -3,7 +3,7 @@ import logging
 import openai
 import openai.error
 
-from app.gpt.base_gpt import BaseGPT
+from app.text_gpt.base_gpt import BaseGPT
 
 
 class Completion(BaseGPT):
