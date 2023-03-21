@@ -7,13 +7,25 @@ class Controller:
         self._completion = app.text_gpt.Completion(text_completion_model)
 
     def chat_request(self):
-        prompt = input(">>")
-        response = self._chat.gpt_request(prompt)
+        print("Type 'quit' to close")
+        run = 1
+        while run != 0:
+            prompt = input(">>")
 
-        print(f"\n{response}")
+            if prompt != "quit":
+                response = self._chat.gpt_request(prompt)
+                print(f"\n{response}")
+            else:
+                run = 0
 
     def text_completion_request(self):
-        prompt = input(">>")
-        response = self._completion.gpt_request(prompt)
+        print("Type 'quit' to close")
+        run = 1
+        while run != 0:
+            prompt = input(">>")
 
-        print(f"\n{response}")
+            if prompt != "quit":
+                response = self._completion.gpt_request(prompt)
+                print(f"\n{response}")
+            else:
+                run = 0

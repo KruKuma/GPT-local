@@ -20,17 +20,24 @@ class Application:
         openai.api_key = open_api_key.get("api_key")
 
     def define_option(self):
-        option = int(input("\n===== OPTION ====="
-                           "\n1. Chat"
-                           "\n2. Text Completion"
-                           "\n0. Quit"
-                           "\n>>"))
 
-        if option == 1:
-            self._controller.chat_request()
-        elif option == 2:
-            self._controller.text_completion_request()
-        elif option == 0:
-            exit()
-        else:
-            print("Not an option")
+        app_option = 1
+        while app_option != 0:
+            try:
+                option = int(input("\n===== OPTION ====="
+                                   "\n1. Chat"
+                                   "\n2. Text Completion"
+                                   "\n0. Quit"
+                                   "\n>>"))
+
+                if option == 1:
+                    self._controller.chat_request()
+                elif option == 2:
+                    self._controller.text_completion_request()
+                elif option == 0:
+                    app_option = 0
+                else:
+                    print("\nNot an option")
+
+            except ValueError:
+                print("\nNot an integer")
