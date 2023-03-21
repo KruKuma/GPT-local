@@ -1,8 +1,8 @@
-import logging
 import os
-import openai
-import openai.error
 
+import openai
+
+import app
 import utils
 
 
@@ -13,39 +13,31 @@ class Application:
         dot_env_file = utils.DotEnvFile(dot_env_file_path)
         open_api_key = dot_env_file.load_open_ai_key()
         model_code = dot_env_file.load_model_code()
-        self._model = model_code.get("model")
+
+        self._controller = app.Controller(model_code["chat_model"],
+                                          model_code["text_completion"])
 
         openai.api_key = open_api_key.get("api_key")
 
-    def generate_text(self, prompt):
-        self.check_prompt(prompt)
+    def define_option(self):
 
-        try:
-            completions = openai.Completion.create(
-                engine=self._model,
-                prompt=prompt,
-                max_tokens=1024,
-                n=1,
-                stop=None,
-                temperature=0.7
-            )
+        app_option = 1
+        while app_option != 0:
+            try:
+                option = int(input("\n===== OPTION ====="
+                                   "\n1. Chat"
+                                   "\n2. Text Completion"
+                                   "\n0. Quit"
+                                   "\n>>"))
 
-            message = completions.choices[0].text.strip()
-            if not message:
-                return "Could not generate response"
+                if option == 1:
+                    self._controller.chat_request()
+                elif option == 2:
+                    self._controller.text_completion_request()
+                elif option == 0:
+                    app_option = 0
+                else:
+                    print("\nNot an option")
 
-            return message
-        except openai.error.APIError as e:
-            logging.error(f"OpenAI API returned an API Error: {e}")
-            return "API Error"
-        except openai.error.APIConnectionError as e:
-            logging.error(f"Failed to connect to OpenAI API: {e}")
-            return "Connection Error"
-        except openai.error.RateLimitError as e:
-            logging.error(f"OpenAI API request exceeded rate limit: {e}")
-            return "Rate Limit Exceeded"
-
-    @staticmethod
-    def check_prompt(prompt):
-        if not isinstance(prompt, str) or len(prompt) == 0:
-            raise ValueError("Invalid prompt")
+            except ValueError:
+                print("\nNot an integer")
