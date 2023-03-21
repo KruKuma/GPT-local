@@ -2,7 +2,7 @@
 import logging
 import openai
 
-from application.gpt.base_gpt import BaseGPT
+from app.gpt.base_gpt import BaseGPT
 
 
 class Chat(BaseGPT):
