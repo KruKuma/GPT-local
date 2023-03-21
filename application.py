@@ -2,7 +2,7 @@ import os
 
 import openai
 
-import application
+import app
 import utils
 
 
@@ -14,8 +14,8 @@ class Application:
         open_api_key = dot_env_file.load_open_ai_key()
         model_code = dot_env_file.load_model_code()
 
-        self._controller = application.Controller(model_code["chat_model"],
-                                                  model_code["text_completion"])
+        self._controller = app.Controller(model_code["chat_model"],
+                                          model_code["text_completion"])
 
         openai.api_key = open_api_key.get("api_key")
 
